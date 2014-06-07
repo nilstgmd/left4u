@@ -111,7 +111,7 @@ public class BrowseStuffRequest implements IRequest<List<StuffItem>> {
 		}
 		if (lon != null)
 		{
-			requestUri = requestUri + "lon=" + lon + "&";
+			requestUri = requestUri + "long=" + lon + "&";
 		}
 		
 		final HttpGet get = new HttpGet(URLEncoder.encode(requestUri, UTF_8));
