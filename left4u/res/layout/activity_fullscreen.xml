@@ -17,10 +17,12 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:keepScreenOn="true"
-        android:text="@string/dummy_content"
+        android:text=""
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />
+    
+   
 
     <!--
          This FrameLayout insets its children based on system windows using
@@ -31,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true" >
-
+    
         <LinearLayout
             android:id="@+id/fullscreen_content_controls"
             style="?metaButtonBarStyle"
@@ -43,12 +45,30 @@
             tools:ignore="UselessParent" >
 
             <Button
-                android:id="@+id/dummy_button"
+                android:id="@+id/browse_button"
                 style="?metaButtonBarButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/dummy_button" />
+                android:text="@string/browse_button" />
+            
+		    <Button
+		        android:id="@+id/map_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/map_button" />
+		    
+		    <Button
+		        android:id="@+id/post_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/post_button" />
+		    		    
+                
         </LinearLayout>
     </FrameLayout>
 

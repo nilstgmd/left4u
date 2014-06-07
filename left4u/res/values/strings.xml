@@ -2,7 +2,10 @@
 <resources>
 
     <string name="app_name">left4u</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="browse_button">Browse</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="map_button">Map</string>
+    <string name="post_button">Post</string>
+    <string name="next_button">Next</string>
 
 </resources>
