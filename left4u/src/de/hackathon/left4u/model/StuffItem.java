@@ -2,6 +2,9 @@ package de.hackathon.left4u.model;
 
 import java.util.List;
 
+/**
+ * @author <a href="mailto:meder@adobe.com">Nils Meder</a>
+ */
 public class StuffItem {
 
 	private final String id;

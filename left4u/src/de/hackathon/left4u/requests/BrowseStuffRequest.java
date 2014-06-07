@@ -2,6 +2,7 @@ package de.hackathon.left4u.requests;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,11 +19,31 @@ import org.json.JSONObject;
 
 import de.hackathon.left4u.model.StuffItem;
 
+/**
+ * @author <a href="mailto:meder@adobe.com">Nils Meder</a>
+ */
 public class BrowseStuffRequest implements IRequest<List<StuffItem>> {
 
+	private static final String UTF_8 = "UTF-8";
 	private static final String ENDPOINT = RequestConstants.BASE_URL + "/"
 			+ RequestConstants.ENDPOINT_STUFF;
 
+	private final String sort;
+	private final String filter;
+	private final String lat;
+	private final String lon;
+	
+	/**
+	 * Constructs a new {@link BrowseStuffRequest}.
+	 */
+	public BrowseStuffRequest(String sort, String filter, String lat, String lon)
+	{
+		this.sort = sort;
+		this.filter = filter;
+		this.lat = lat;
+		this.lon = lon;
+	}
+	
 	@Override
 	public List<StuffItem> execute() {
 		List<StuffItem> stuffs = Arrays.<StuffItem> asList();
@@ -73,7 +94,27 @@ public class BrowseStuffRequest implements IRequest<List<StuffItem>> {
 	private HttpResponse executeGet() throws IOException,
 			ClientProtocolException {
 		final HttpClient httpclient = new DefaultHttpClient();
-		final HttpGet get = new HttpGet(ENDPOINT);
+		
+		String requestUri = ENDPOINT + "?";
+		
+		if (sort != null)
+		{
+			requestUri = requestUri + "sort=" + sort + "&";
+		}
+		if (filter != null)
+		{
+			requestUri = requestUri + "filter=" + filter + "&";
+		}
+		if (lat != null)
+		{
+			requestUri = requestUri + "lat=" + lat + "&";
+		}
+		if (lon != null)
+		{
+			requestUri = requestUri + "lon=" + lon + "&";
+		}
+		
+		final HttpGet get = new HttpGet(URLEncoder.encode(requestUri, UTF_8));
 		final HttpResponse response = httpclient.execute(get);
 		return response;
 	}

@@ -17,6 +17,9 @@ import org.json.JSONObject;
 
 import de.hackathon.left4u.model.StuffItem;
 
+/**
+ * @author <a href="mailto:meder@adobe.com">Nils Meder</a>
+ */
 public class GetStuffRequest implements IRequest<List<StuffItem>> {
 
 	private static final String ENDPOINT = RequestConstants.BASE_URL + "/"
