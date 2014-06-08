@@ -1,9 +1,14 @@
 package de.hackthon.left4u;
 
-import de.hackthon.left4u.util.SystemUiHider;
+import java.util.List;
 
+import de.hackathon.left4u.model.StuffItem;
+import de.hackathon.left4u.requests.BrowseStuffRequest;
+import de.hackathon.left4u.requests.GetStuffRequest;
+import de.hackthon.left4u.util.SystemUiHider;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,7 +55,6 @@ public class FullscreenActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_fullscreen);
-
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
 
@@ -111,10 +115,9 @@ public class FullscreenActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-//        findViewById(R.id.next_button).setOnTouchListener(mDelayHideTouchListener);
-        findViewById(R.id.browse_button).setOnTouchListener(mDelayHideTouchListener);
-        findViewById(R.id.map_button).setOnTouchListener(mDelayHideTouchListener);
-        findViewById(R.id.post_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.browse_button).setOnTouchListener(mDelayHideTouchListener_browse);
+        findViewById(R.id.post_button).setOnTouchListener(mDelayHideTouchListener_post);
+        findViewById(R.id.map_button).setOnTouchListener(mDelayHideTouchListener_map);
     }
 
     @Override
@@ -124,7 +127,7 @@ public class FullscreenActivity extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+       // delayedHide(100);
     }
 
 
@@ -133,11 +136,34 @@ public class FullscreenActivity extends Activity {
      * system UI. This is to prevent the jarring behavior of controls going away
      * while interacting with activity UI.
      */
-    View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
+    View.OnTouchListener mDelayHideTouchListener_browse = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view_browse, MotionEvent motionEvent) {
+            if (AUTO_HIDE) {
+            	// Most recent
+            	Intent intent = new Intent(getParent(), BrowseActivity.class);
+            	startActivity(intent);
+                delayedHide(AUTO_HIDE_DELAY_MILLIS);
+            }
+            return false;
+        }
+    };
+        
+   View.OnTouchListener mDelayHideTouchListener_post = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
+            }
+            return false;
+        }
+   };
+            
+	View.OnTouchListener mDelayHideTouchListener_map = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (AUTO_HIDE) {
+            	delayedHide(AUTO_HIDE_DELAY_MILLIS);
             }
             return false;
         }
